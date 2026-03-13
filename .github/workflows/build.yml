@@ -9,15 +9,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install pyinstaller -r requirements.txt
-      - uses: actions/upload-artifact@v- 
-      - run: |
-          pyinstaller --onefile --windowed `
-          --add-data "*.png;." `
-          --add-data "*.gif;." `
-          --add-data "*.mp3;." `
-          --add-data "*.txt;." `
-          --add-data "*.ttf;." `
-          A_pathfinding_algorithm.py4
+      - run: pyinstaller --onefile --windowed --add-data "*.png;." --add-data "*.gif;." --add-data "*.mp3;." --add-data "*.txt;." --add-data "*.ttf;." A_pathfinding_algorithm.py
+      - uses: actions/upload-artifact@v4
         with:
           name: app-exe
           path: dist/A_pathfinding_algorithm.exe
