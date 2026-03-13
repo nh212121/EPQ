@@ -1,0 +1,29 @@
+This will be a brief explanation
+of how pathfinding works.
+
+So what is Pathfinding?
+Pathfinding is a set of techniques 
+used to find the most efficient 
+route between two points.
+
+In this program, I am going to
+illustrate how and why pathfinding
+algorithms are used.
+
+Today we are going to discuss
+the A* pathfinding algorithm.
+
+The A* pathfinding algorithm
+consists of these key features:
+
+Heuristics,
+A start node,
+An end node,
+Obstacles,
+And neighbouring nodes.
+
+Lets take a deep dive into what 
+each of these components of the
+A* pathfinding algorithm do and
+how they are implemented during
+programming/development stages.

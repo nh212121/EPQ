@@ -1,0 +1,16 @@
+
+
+What do A* pathfinding algorithms use which involves providing an
+optimisitc estimation between the start and end node?
+
+Well done!!!
+Given nodes A-B (distance 3, heuristic 10) and A-C (distance 7, heuristic 4), 
+which node would A* explore first?
+
+Nicely done!
+
+This is another test for verification
+
+More text here
+
+

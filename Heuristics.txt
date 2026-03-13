@@ -1,0 +1,44 @@
+
+
+So what are heuristics?
+
+Heuristics are an optimistic estimation
+for the distance from any node to the end
+node.
+
+You can think of this as guessing how 
+far a checkpoint is from the end point.
+
+In this diagram, the heuristic value
+is represented by the yellow number.
+
+Under the condition that we wish to path
+from node A to node F, without heuristics,
+the algorithm would path to B from A.
+
+This is wrong as it will take more steps
+to find the end node F, making it an 
+unoptimal path.
+
+Additionally, without heuristics, all
+nodes must be checked before creating
+a final path, which does not scale well.
+
+With heuristics, we can create a 
+'F' value which is equal to the total of 
+the heuristic value (yellow number), and 
+the distance between the adjacent 
+node (black number).
+
+In this case, our algorithm will path to
+node D instead of B, since the F value of
+D (5 + 5 = 10) is smaller than the F value
+of B (2 + 15 = 17).
+
+As a result, less steps are taken to find
+the end node F, making our algorithm more
+efficient.
+
+Heuristics additionally prevents the
+algorithm from having to check all nodes, 
+which improves efficiency.

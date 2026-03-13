@@ -1,0 +1,26 @@
+Well what is a node?
+
+The example on the left is a practical
+visualisation of nodes connected to eachother.
+
+The example on the right represents the 
+starting node that will be used in our
+algorithm.
+
+In pathfinding, a node is a point in a search area
+that the pathfinding algorithm can consider as
+a path.
+
+If we look at the example on the left, each node is 
+connected to another node that contains an allocated 
+distance.
+
+Our pathfinding algorithm will path to the node with
+the shortest distance to the current node.
+
+If we were to start on node A, our algorithm would
+path to node C, since it has the shortest distance
+from A.
+
+However, there is another key concept we are missing
+with this demonstration.

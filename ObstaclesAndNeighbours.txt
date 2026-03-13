@@ -1,0 +1,61 @@
+
+
+So what do we need first?
+
+We first need our algorithm to understand
+where our neighbouring nodes are and
+what can and cannot be traversed through.
+
+We do this by identifying what is a wall
+and what is not a wall.
+
+Lets say we have a blank grid.
+
+Now lets add some black squares to the grid.
+
+We can easily tell our program what is and
+is not a wall depending on if the square is
+black or white.
+
+If we were representing this in an array,
+we could simply 1s and 0s as a representation
+of white and black colours.
+
+Now lets create a start node and an end node.
+
+So how are we supposed to find the end node
+from the start node?
+
+Well first we must check the neighboruing nodes
+to the start node.
+
+This means we check all of the nodes that are
+next to the start nodes.
+
+Once we do this, we then repeat this process,
+checking the next area of surrounding nodes.
+
+But how are we supposed to know when to check
+areas closer to the end node?
+
+This is where heuristics comes in.
+
+In our program, we are checking the distance 
+of the neighbouring nodes compared to the end
+node.
+
+The neighbouring nodes with the shortest distance
+from the end node is favoured, so those specific
+neighbouring nodes will be checked.
+
+If however, one of the neighbouring nodes is a block,
+this node cannot be checked, forcing the algorithm to
+direct itself around it.
+
+This process is repeated over...
+
+And over...
+
+And over...
+
+Until we find the end node.
