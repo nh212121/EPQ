@@ -8,6 +8,12 @@ import random
 from PIL import Image, ImageSequence
 
 
+def resource_path(relative_path):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), relative_path)
+
+
 pygame.init()
 pygame.mixer.init()
 
@@ -15,7 +21,7 @@ pygame.mixer.init()
 width = 800
 window = pygame.display.set_mode((width, width))
 pygame.display.set_caption("A* algorithm")
-font = pygame.freetype.Font("runescape.ttf", 38)
+font = pygame.freetype.Font(resource_path("runescape.ttf"), 38)
 
 # creating variables for colors
 RED = (255, 0, 0)
@@ -32,8 +38,8 @@ TURQUOISE = (64, 224, 208)
 
 clock = pygame.time.Clock()
 
-progressSound = pygame.mixer.Sound("yipee.mp3")
-pygame.mixer.music.load("melody.mp3")
+progressSound = pygame.mixer.Sound(resource_path("yipee.mp3"))
+pygame.mixer.music.load(resource_path("melody.mp3"))
 pygame.mixer.music.play(-1)
 
 button_font = pygame.font.Font(None, 48)
@@ -48,7 +54,7 @@ class GifPlayer:
         self.pos = pos
 
         # Load GIF using PIL
-        pil_image = Image.open(gif_path)
+        pil_image = Image.open(resource_path(gif_path))
         for frame in ImageSequence.Iterator(pil_image):
             # Convert PIL image to PyGame surface
             frame = frame.convert("RGBA")
@@ -186,13 +192,10 @@ class ObstaclesAndNeighbours:
     def __init__(self):
         self.count = 0
 
-        self.current_dir = os.path.dirname(__file__)
-        self.image_path = os.path.join(self.current_dir, "grid.png")
-        self.imp = pygame.image.load(self.image_path)
+        self.imp = pygame.image.load(resource_path("grid.png"))
         self.imp = pygame.transform.scale_by(self.imp, 0.8)
 
-        self.image_path2 = os.path.join(self.current_dir, "grid_with_blocks.png")
-        self.imp2 = pygame.image.load(self.image_path2)
+        self.imp2 = pygame.image.load(resource_path("grid_with_blocks.png"))
         self.imp2 = pygame.transform.scale_by(self.imp2, 0.5)
 
         self.Text = animatedButton(
@@ -203,7 +206,7 @@ class ObstaclesAndNeighbours:
 
     def filehandler(self, file, forward):
         if forward == True:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
 
@@ -218,7 +221,7 @@ class ObstaclesAndNeighbours:
                 else:
                     self.Next.text = "Next"
         elif forward == False:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
                 if self.count <= 0:
@@ -245,53 +248,43 @@ class ObstaclesAndNeighbours:
         window.blit(self.imp, (x, y))
 
         if self.count >= 6:
-            self.image_path2 = os.path.join(self.current_dir, "grid_with_blocks.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("grid_with_blocks.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.8)
 
         if self.count >= 9:
-            self.image_path2 = os.path.join(self.current_dir, "Start_node.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("Start_node.png"))
             self.imp = pygame.transform.scale_by(self.imp, 1.2)
 
         if self.count >= 11:
-            self.image_path2 = os.path.join(self.current_dir, "Others.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("Others.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.7)
 
         if self.count >= 13:
-            self.image_path2 = os.path.join(self.current_dir, "area.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("area.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.8)
 
         if self.count >= 15:
-            self.image_path2 = os.path.join(self.current_dir, "distances.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("distances.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.9)
 
         if self.count >= 17:
-            self.image_path2 = os.path.join(self.current_dir, "lookBlock.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("lookBlock.png"))
             self.imp = pygame.transform.scale_by(self.imp, 1.1)
 
         if self.count >= 18:
-            self.image_path2 = os.path.join(self.current_dir, "stepOne.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("stepOne.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.7)
 
         if self.count >= 19:
-            self.image_path2 = os.path.join(self.current_dir, "stepTwo.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("stepTwo.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.7)
 
         if self.count >= 20:
-            self.image_path2 = os.path.join(self.current_dir, "stepThree.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("stepThree.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.7)
 
         if self.count >= 21:
-            self.image_path2 = os.path.join(self.current_dir, "stepFour.png")
-            self.imp = pygame.image.load(self.image_path2)
+            self.imp = pygame.image.load(resource_path("stepFour.png"))
             self.imp = pygame.transform.scale_by(self.imp, 0.7)
 
     def handle_event(self, event, mouse_pos):
@@ -307,9 +300,7 @@ class ExplainHeuristics:
     def __init__(self):
         self.count = 0
 
-        self.current_dir = os.path.dirname(__file__)
-        self.image_path = os.path.join(self.current_dir, "H-photo.png")
-        self.imp = pygame.image.load(self.image_path)
+        self.imp = pygame.image.load(resource_path("H-photo.png"))
 
         self.gif = GifPlayer("yellow.gif", 300, pos=(150, 220))
         self.gif2 = GifPlayer("wrongPath.gif", 300, pos=(150, 220))
@@ -322,7 +313,7 @@ class ExplainHeuristics:
 
     def filehandler(self, file, forward):
         if forward == True:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
 
@@ -337,7 +328,7 @@ class ExplainHeuristics:
                 else:
                     self.Next.text = "Next"
         elif forward == False:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
                 if self.count <= 0:
@@ -360,8 +351,7 @@ class ExplainHeuristics:
         self.Return.draw(window)
 
         if self.count <= 3:
-            self.image_path = os.path.join(self.current_dir, "H-photo.png")
-            self.imp = pygame.image.load(self.image_path)
+            self.imp = pygame.image.load(resource_path("H-photo.png"))
             window.blit(self.imp, (100, 200))
 
         if self.count == 4:
@@ -369,8 +359,7 @@ class ExplainHeuristics:
             self.gif.update(currentTime)
 
         if self.count == 5:
-            self.image_path = os.path.join(self.current_dir, "toB.png")
-            self.imp = pygame.image.load(self.image_path)
+            self.imp = pygame.image.load(resource_path("toB.png"))
             window.blit(self.imp, (100, 200))
 
         if self.count == 6:
@@ -378,8 +367,7 @@ class ExplainHeuristics:
             self.gif2.update(currentTime)
 
         if self.count == 7:
-            self.image_path = os.path.join(self.current_dir, "checkAll.png")
-            self.imp = pygame.image.load(self.image_path)
+            self.imp = pygame.image.load(resource_path("checkAll.png"))
             window.blit(self.imp, (100, 200))
 
     def handle_event(self, event, mouse_pos):
@@ -395,18 +383,12 @@ class ExplainNodes:
     def __init__(self):
         self.count = 0
 
-        # self.Text = Button(0, 0, 800, 400, "Well, what is a node?", DARKBLUE, BLUE)
         self.Text = animatedButton(0, 0, 800, 400, "Well what is a node?", WHITE, False)
         self.Next = Button(300, 720, 200, 50, "Next", DARKBLUE, BLUE)
         self.Return = Button(0, 730, 150, 60, "Back", DARKBLUE, BLUE)
 
-        self.current_dir = os.path.dirname(__file__)
-
-        self.image_path = os.path.join(self.current_dir, "Node.png")
-        self.image_path2 = os.path.join(self.current_dir, "realNode.png")
-
-        self.imp = pygame.image.load(self.image_path)
-        self.imp2 = pygame.image.load(self.image_path2)
+        self.imp = pygame.image.load(resource_path("Node.png"))
+        self.imp2 = pygame.image.load(resource_path("realNode.png"))
 
         self.imp = pygame.transform.scale(
             self.imp, (self.imp.get_width() * 2, self.imp.get_height() * 2)
@@ -423,7 +405,7 @@ class ExplainNodes:
 
     def filehandler(self, file, forward):
         if forward == True:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
 
@@ -438,7 +420,7 @@ class ExplainNodes:
                 else:
                     self.Next.text = "Next"
         elif forward == False:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
                 if self.count <= 0:
@@ -463,35 +445,30 @@ class ExplainNodes:
         window.blit(self.imp2, (self.x2, self.y2))
 
         if self.count >= 1:
-            self.image_path2 = os.path.join(self.current_dir, "realNode.png")
-            self.imp2 = pygame.image.load(self.image_path2)
+            self.imp2 = pygame.image.load(resource_path("realNode.png"))
             self.imp2 = pygame.transform.scale_by(self.imp2, 0.5)
             self.x2 = 110
             self.y2 = 220
 
         if self.count >= 2:
-            self.image_path2 = os.path.join(self.current_dir, "realNode.png")
-            self.imp2 = pygame.image.load(self.image_path2)
+            self.imp2 = pygame.image.load(resource_path("realNode.png"))
             self.imp2 = pygame.transform.scale_by(self.imp2, 0.4)
             self.x2 = 0
             self.y2 = 400
 
-            self.image_path = os.path.join(self.current_dir, "Node.png")
-            self.imp = pygame.image.load(self.image_path)
+            self.imp = pygame.image.load(resource_path("Node.png"))
             self.imp = pygame.transform.scale_by(self.imp, 2.5)
             self.x1 = 350
             self.y1 = 250
 
         if self.count >= 3:
-            self.image_path = os.path.join(self.current_dir, "Node.png")
-            self.imp = pygame.image.load(self.image_path)
+            self.imp = pygame.image.load(resource_path("Node.png"))
             self.imp = pygame.transform.scale_by(self.imp, 2)
             self.x1 = 600
             self.y1 = 500
 
         if self.count >= 6:
-            self.image_path2 = os.path.join(self.current_dir, "nodeA.png")
-            self.imp2 = pygame.image.load(self.image_path2)
+            self.imp2 = pygame.image.load(resource_path("nodeA.png"))
             self.imp2 = pygame.transform.scale_by(self.imp2, 0.7)
             self.x2 = 0
             self.y2 = 300
@@ -523,7 +500,7 @@ class Exam:
         pass
 
     def filehandler(self, file):
-        with open(file) as f:
+        with open(resource_path(file)) as f:
             f = f.read()
             f = f.split("\n\n")
 
@@ -573,7 +550,7 @@ class Tutorial:
 
     def filehandler(self, file, forward):
         if forward == True:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
 
@@ -590,7 +567,7 @@ class Tutorial:
                     self.Next.text = "Next"
 
         elif forward == False:
-            with open(file) as f:
+            with open(resource_path(file)) as f:
                 f = f.read()
                 f = f.split("\n\n")
                 if self.count <= 0:
@@ -909,8 +886,6 @@ class Sandbox:
         return row, col
 
 
-# main(window, width)
-# startMenu(window)
 class Game:
     def __init__(self):
         self.windows = {
@@ -935,7 +910,6 @@ class Game:
                 next_window = self.windows[self.current_window].handle_event(
                     event, mouse_pos
                 )
-                # print(self.handle_event(event, mouse_pos))
                 if next_window:
                     self.current_window = next_window
 
@@ -947,7 +921,6 @@ class Game:
         pygame.quit()
 
 
-# Game.run()
 if __name__ == "__main__":
     game = Game()
     game.run()
