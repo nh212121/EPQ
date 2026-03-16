@@ -1,16 +1,47 @@
 
 
-What do A* pathfinding algorithms use which involves providing an
-optimisitc estimation between the start and end node?
+What do A* pathfinding algorithms use which 
+involves providing an optimisitc estimation 
+between the start and end node?
+Type your answer:
 
 Well done!!!
-Given nodes A-B (distance 3, heuristic 10) and A-C (distance 7, heuristic 4), 
+Given nodes A-B (distance 3, heuristic 10) 
+and A-C (distance 7, heuristic 4), 
 which node would A* explore first?
+Type your answer:
 
 Nicely done!
+Without heuristics, why is A* less efficient?
+Type your answer:
 
-This is another test for verification
+Very good! all nodes would need to be checked
+before the algorithm finishes, making it less
+efficient!
+What forces the algorithm to path around a 
+wall?
+Type your answer:
 
-More text here
+Yes!
+Wall nodes are not checked and therefore not
+added to the search, forcing the algorithm to
+only expand through the remaining valid 
+neighbours.
+What two values are added together to calculate
+the F value?
+Type your answer:
+
+Exactly!
+The F value consists of the heuristic value 
+and the distance between the two nodes.
+Final question:
+In a basic example of programming an A*
+algorithm using 1s and 0s in a 2-dimensional 
+array, if 0 was used to represent an empty
+node, what does 1 represent?
+
+Well done!
+You can type (end) to go to the sandbox
+
 
 

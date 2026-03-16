@@ -370,6 +370,14 @@ class ExplainHeuristics:
             self.imp = pygame.image.load(resource_path("checkAll.png"))
             window.blit(self.imp, (100, 200))
 
+        if self.count == 8:
+            self.imp = pygame.image.load(resource_path("calcF.png"))
+            window.blit(self.imp, (100, 200))
+
+        if self.count >= 9:
+            self.imp = pygame.image.load(resource_path("biggerF.png"))
+            window.blit(self.imp, (100, 200))
+
     def handle_event(self, event, mouse_pos):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.Next.is_clicked(mouse_pos):
@@ -485,16 +493,38 @@ class ExplainNodes:
 class Exam:
     def __init__(self):
         self.count = 0
+        self.timer = 0
+        self.marks = 0
+        self.renderSkip = False
         self.userText = ""
         self.Text = animatedButton(
             0,
             0,
             800,
             40,
-            "lets have a go at answering some questions now.",
+            "lets have a go at answering some questions now. \n press enter to continue.",
             WHITE,
             False,
         )
+        self.Skip = animatedButton(
+            0,
+            500,
+            800,
+            40,
+            "Not quite... You can type (skip) to skip this question.",
+            WHITE,
+            False,
+        )
+        self.totalScore = animatedButton(
+            0,
+            600,
+            800,
+            40,
+            ("you currently have " + str(self.marks) + " out of 6 points"),
+            WHITE,
+            False,
+        )
+        
 
     def update(self, mouse_pos):
         pass
@@ -505,13 +535,17 @@ class Exam:
             f = f.split("\n\n")
 
             if self.count >= len(f) - 1:
-                return "heuristic"
+                return "tutorial"
             else:
                 self.count += 1
                 self.Text.text = f[self.count]
 
     def checkAnswer(self, text, correct):
-        if text == correct:
+        if text == correct and self.count <= 2:
+            self.marks += 1
+            return True
+        elif correct in text and self.count > 2:
+            self.marks += 1
             return True
         else:
             return False
@@ -519,7 +553,18 @@ class Exam:
     def draw(self, window):
         window.fill(WHITE)
         self.Text.draw(window)
-        font.render_to(window, (20, 150), self.userText, BLACK)
+        font.render_to(window, (20, 400), self.userText, BLACK)
+        if self.renderSkip:
+            if self.timer < 100:
+                self.Skip.draw(window)
+                self.timer += 1
+
+            elif self.timer >= 100:
+                self.timer = 0
+                self.renderSkip = False
+        self.totalScore.text = "you currently have " + str(self.marks) + " out of 6 points"
+        self.totalScore.draw(window)
+
 
     def handle_event(self, event, mouse_pos):
         if event.type == pygame.KEYDOWN:
@@ -532,6 +577,28 @@ class Exam:
                     self.filehandler("Exam.txt")
                 elif self.checkAnswer(self.userText, "C") and self.count == 2:
                     self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "all node") and self.count == 3:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "every node") and self.count == 3:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "checked") and self.count == 4:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "traversed") and self.count == 4:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "heuristic and distance") and self.count == 5:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "heuristic value and distance") and self.count == 5:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "wall") and self.count == 6:
+                    self.filehandler("Exam.txt")
+                elif self.checkAnswer(self.userText, "black") and self.count == 6:
+                    self.filehandler("Exam.txt")
+                elif self.userText == "skip":
+                    self.filehandler("Exam.txt")
+                elif self.userText == "end":
+                    return "sandbox"
+                else:
+                    self.renderSkip = True
             else:
                 self.userText += event.unicode
 
