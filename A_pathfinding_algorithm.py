@@ -1,5 +1,6 @@
 # A* pathfinding algorithm
 import pygame
+import pygame.freetype
 import math
 from queue import PriorityQueue
 import sys
